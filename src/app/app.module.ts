@@ -6,13 +6,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { GameConsoleComponent } from './game-console/game-console.component';
 import { GameInitComponent } from './game-console/game-init/game-init.component';
 import { GameNewComponent } from './game-console/game-new/game-new.component';
+import { GameJoinComponent } from './game-console/game-join/game-join.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     GameConsoleComponent,
     GameInitComponent,
-    GameNewComponent
+    GameNewComponent,
+    GameJoinComponent
   ],
   imports: [
     BrowserModule,
