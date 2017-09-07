@@ -11,8 +11,11 @@ export class GameConsoleService {
   constructor(private http: Http) { }
 
   createGame() {
-    this.http.post('http://localhost:3000/games', { player: 'Benja' })
-      .subscribe(data => this.game = data );
+    return this.http.post('http://localhost:3000/games', { player: 'Benja' })
+      .map((response: Response) => {
+        this.game = response.json();
+        return this.game;
+      });
   }
 
   getGame(accessCode) {
