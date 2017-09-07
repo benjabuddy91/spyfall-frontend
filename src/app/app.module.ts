@@ -9,6 +9,8 @@ import { GameInitComponent } from './game-console/game-init/game-init.component'
 import { GameNewComponent } from './game-console/game-new/game-new.component';
 import { GameJoinComponent } from './game-console/game-join/game-join.component';
 import { GameConsoleService } from './game-console/game-console.service';
+import { GamePlayComponent } from './game-console/game-play/game-play.component';
+import { GameLobbyComponent } from './game-console/game-lobby/game-lobby.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { GameConsoleService } from './game-console/game-console.service';
     GameConsoleComponent,
     GameInitComponent,
     GameNewComponent,
-    GameJoinComponent
+    GameJoinComponent,
+    GamePlayComponent,
+    GameLobbyComponent
   ],
   imports: [
     BrowserModule,
