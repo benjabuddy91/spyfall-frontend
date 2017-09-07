@@ -8,10 +8,12 @@ export class GameConsoleService {
   gameChanged = new Subject();
   gameStateChanged = new Subject();
   game: Object;
+  player: String;
 
   constructor(private http: Http) { }
 
   createGame(player) {
+    this.player = player;
     return this.http.post('http://localhost:3000/games', { player: player })
       .map((response: Response) => {
         return this.game = response.json();
@@ -19,9 +21,9 @@ export class GameConsoleService {
   }
 
   joinGame(player, accessCode) {
+    this.player = player;
     return this.http.put('http://localhost:3000/games/' + accessCode + '/join', { player: player })
       .map((response) => {
-        console.log(response);
         return this.game = response.json();
       })
   }
