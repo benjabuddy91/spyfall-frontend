@@ -18,10 +18,19 @@ export class GameConsoleService {
       });
   }
 
+  joinGame(player, accessCode) {
+    return this.http.put('http://localhost:3000/games/' + accessCode + '/join', { player: player })
+      .map((response) => {
+        console.log(response);
+        return this.game = response.json();
+      })
+  }
+
   getGame(accessCode) {
     return this.http.get('http://localhost:3000/games/' + accessCode)
       .map((response) => {
         return this.game = response.json();
       })
   }
+
 }

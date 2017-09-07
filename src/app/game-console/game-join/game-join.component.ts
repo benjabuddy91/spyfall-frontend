@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 
 import { GameConsoleService } from './../game-console.service';
 
@@ -8,12 +10,25 @@ import { GameConsoleService } from './../game-console.service';
   styleUrls: ['./game-join.component.css']
 })
 export class GameJoinComponent implements OnInit {
+  gameForm: FormGroup = new FormGroup({
+    'accessCode': new FormControl(),
+    'player': new FormControl()
+  });
 
-  constructor(private gameConsoleService: GameConsoleService) { }
+  constructor(private router: Router,
+              private route: ActivatedRoute,
+              private gameConsoleService: GameConsoleService) { }
 
   ngOnInit() {
     this.gameConsoleService.gameStateChanged
       .next('join');
+  }
+
+  joinGame() {
+    this.gameConsoleService.joinGame(this.gameForm.value.player, this.gameForm.value.accessCode)
+      .subscribe((game: Object) => {
+        this.router.navigate(['../', game['accessCode']], { relativeTo: this.route });
+      });
   }
 
 }
