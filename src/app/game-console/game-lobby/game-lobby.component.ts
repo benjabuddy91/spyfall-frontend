@@ -28,4 +28,11 @@ export class GameLobbyComponent implements OnInit {
       });
   }
 
+  startGame() {
+    this.gameConsoleService.startGame()
+      .subscribe(game => {
+        this.router.navigate(['../', game['accessCode'], 'play'],  { relativeTo: this.route });
+      });
+  }
+
 }

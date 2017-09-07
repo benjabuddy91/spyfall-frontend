@@ -35,4 +35,11 @@ export class GameConsoleService {
       })
   }
 
+  startGame() {
+    return this.http.put('http://localhost:3000/games/' + this.game['accessCode'] + '/start', {})
+      .map((response) => {
+        return this.game = response.json();
+      })
+  }
+
 }

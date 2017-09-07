@@ -7,13 +7,15 @@ import { GameInitComponent } from './game-console/game-init/game-init.component'
 import { GameNewComponent } from './game-console/game-new/game-new.component';
 import { GameJoinComponent } from './game-console/game-join/game-join.component';
 import { GameLobbyComponent } from './game-console/game-lobby/game-lobby.component';
+import { GamePlayComponent } from './game-console/game-play/game-play.component';
 
 const appRoutes: Routes = [
   { path: '', component: GameConsoleComponent, children: [
     { path: '', component: GameInitComponent },
     { path: 'new', component: GameNewComponent },
     { path: 'join', component: GameJoinComponent },
-    { path: ':accessCode', component: GameLobbyComponent }
+    { path: ':accessCode', component: GameLobbyComponent },
+    { path: ':accessCode/play', component: GamePlayComponent }
   ] }
 ];
 

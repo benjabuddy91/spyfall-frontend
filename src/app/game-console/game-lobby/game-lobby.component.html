@@ -13,5 +13,6 @@
   </ol>
 </div>
 
+<a *ngIf="player === game['host']" class="btn btn-default btn-block" (click)="startGame()">Start Game</a>
 <a class="btn btn-default btn-block" routerLink="../">Leave Game</a>
 
