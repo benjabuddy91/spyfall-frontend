@@ -12,6 +12,8 @@ export class GamePlayComponent implements OnInit {
   constructor(private gameConsoleService: GameConsoleService) { }
 
   ngOnInit() {
+    this.gameConsoleService.gameStateChanged
+      .next('play');
   }
 
 }

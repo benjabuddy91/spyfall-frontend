@@ -20,6 +20,8 @@ export class GameNewComponent implements OnInit {
               private gameConsoleService: GameConsoleService) { }
 
   ngOnInit() {
+    this.gameConsoleService.gameStateChanged
+      .next('new');
   }
 
   createGame() {

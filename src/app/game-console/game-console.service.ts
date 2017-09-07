@@ -6,7 +6,7 @@ import 'rxjs/Rx';
 @Injectable()
 export class GameConsoleService {
   gameChanged = new Subject();
-  gameStatus: String;
+  gameStateChanged = new Subject();
   game: Object;
 
   constructor(private http: Http) { }

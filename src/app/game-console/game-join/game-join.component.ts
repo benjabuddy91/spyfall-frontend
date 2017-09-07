@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { GameConsoleService } from './../game-console.service';
+
 @Component({
   selector: 'app-game-join',
   templateUrl: './game-join.component.html',
@@ -7,9 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GameJoinComponent implements OnInit {
 
-  constructor() { }
+  constructor(private gameConsoleService: GameConsoleService) { }
 
   ngOnInit() {
+    this.gameConsoleService.gameState = 'join';
   }
 
 }

@@ -15,6 +15,9 @@ export class GameLobbyComponent implements OnInit {
               private gameConsoleService: GameConsoleService) { }
 
   ngOnInit() {
+    this.gameConsoleService.gameStateChanged
+      .next('lobby');
+
     this.gameConsoleService.gameChanged
       .subscribe(game => {
         this.game = game;

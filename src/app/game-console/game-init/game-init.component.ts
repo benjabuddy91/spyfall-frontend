@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { GameConsoleService } from './../game-console.service';
+
 @Component({
   selector: 'app-game-init',
   templateUrl: './game-init.component.html',
@@ -7,9 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GameInitComponent implements OnInit {
 
-  constructor() { }
+  constructor(private gameConsoleService: GameConsoleService) { }
 
   ngOnInit() {
+    this.gameConsoleService.gameStateChanged
+      .next('init');
   }
 
 }
