@@ -6,15 +6,15 @@ import 'rxjs/Rx';
 @Injectable()
 export class GameConsoleService {
   gameChanged = new Subject();
-  game = {};
+  gameStatus: String;
+  game: Object;
 
   constructor(private http: Http) { }
 
   createGame(player) {
     return this.http.post('http://localhost:3000/games', { player: player })
       .map((response: Response) => {
-        this.game = response.json();
-        return this.game;
+        return this.game = response.json();
       });
   }
 
