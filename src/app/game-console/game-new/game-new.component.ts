@@ -9,7 +9,7 @@ import { GameConsoleService } from './../game-console.service';
   styleUrls: ['./game-new.component.css']
 })
 export class GameNewComponent implements OnInit {
-  game;
+  player: String;
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -19,10 +19,9 @@ export class GameNewComponent implements OnInit {
   }
 
   createGame() {
-    this.gameConsoleService.createGame()
-      .subscribe(game => {
-        this.game = game;
-        this.router.navigate(['../', this.game.accessCode], {relativeTo: this.route});
+    this.gameConsoleService.createGame(this.player)
+      .subscribe((game: Object) => {
+        this.router.navigate(['../', game['accessCode']], {relativeTo: this.route});
       });
   }
 }

@@ -10,8 +10,8 @@ export class GameConsoleService {
 
   constructor(private http: Http) { }
 
-  createGame() {
-    return this.http.post('http://localhost:3000/games', { player: 'Benja' })
+  createGame(player) {
+    return this.http.post('http://localhost:3000/games', { player: player })
       .map((response: Response) => {
         this.game = response.json();
         return this.game;
