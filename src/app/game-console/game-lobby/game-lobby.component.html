@@ -1,4 +1,16 @@
 <h3>Waiting for players</h3>
-<hr>
 
-<p *ngIf="game">{{ game.players }}</p>
+<div *ngIf="game">
+  <h4>Access code: {{ game.accessCode }}</h4>
+  <hr>
+  <ol class="list-group">
+    <li
+      class="list-group-item"
+      *ngFor="let player of game.players">
+      {{ player }}
+    </li>
+  </ol>
+</div>
+
+<a class="btn btn-default btn-block" routerLink="../">Leave Game</a>
+
