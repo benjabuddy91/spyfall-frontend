@@ -12,7 +12,8 @@ export class GameJoinComponent implements OnInit {
   constructor(private gameConsoleService: GameConsoleService) { }
 
   ngOnInit() {
-    this.gameConsoleService.gameState = 'join';
+    this.gameConsoleService.gameStateChanged
+      .next('join');
   }
 
 }
