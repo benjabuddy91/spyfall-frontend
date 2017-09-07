@@ -19,13 +19,9 @@ export class GameConsoleService {
   }
 
   getGame(accessCode) {
-    this.http.get('http://localhost:3000/games/' + accessCode)
+    return this.http.get('http://localhost:3000/games/' + accessCode)
       .map((response) => {
-        return response.json()[0];
+        return this.game = response.json();
       })
-      .subscribe(data => {
-        this.game = data;
-        this.gameChanged.next(this.game);
-      });
   }
 }

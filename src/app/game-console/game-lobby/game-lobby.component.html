@@ -1,12 +1,12 @@
-<h3>Waiting for players</h3>
+<h3>Waiting for players...</h3>
 
 <div *ngIf="game">
-  <h4>Access code: {{ game.accessCode }}</h4>
+  <h4>Access code: {{ game['accessCode'] }}</h4>
   <hr>
   <ol class="list-group">
     <li
       class="list-group-item"
-      *ngFor="let player of game.players">
+      *ngFor="let player of game['players']">
       {{ player }}
     </li>
   </ol>
