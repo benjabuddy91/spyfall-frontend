@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 
 import { GameConsoleService } from './../game-console.service';
 
@@ -10,6 +11,9 @@ import { GameConsoleService } from './../game-console.service';
 })
 export class GameNewComponent implements OnInit {
   player: String;
+  gameForm: FormGroup = new FormGroup({
+    'player': new FormControl()
+  });
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -19,7 +23,7 @@ export class GameNewComponent implements OnInit {
   }
 
   createGame() {
-    this.gameConsoleService.createGame(this.player)
+    this.gameConsoleService.createGame(this.gameForm.value.player)
       .subscribe((game: Object) => {
         this.router.navigate(['../', game['accessCode']], {relativeTo: this.route});
       });
