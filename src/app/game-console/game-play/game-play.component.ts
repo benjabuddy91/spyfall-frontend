@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Subscription } from 'rxjs/Subscription';
+
 import { GameConsoleService } from './../game-console.service';
 
 @Component({
@@ -8,6 +10,7 @@ import { GameConsoleService } from './../game-console.service';
   styleUrls: ['./game-play.component.css']
 })
 export class GamePlayComponent implements OnInit {
+  game: Object;
 
   constructor(private gameConsoleService: GameConsoleService) { }
 

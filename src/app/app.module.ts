@@ -12,6 +12,7 @@ import { GameJoinComponent } from './game-console/game-join/game-join.component'
 import { GameConsoleService } from './game-console/game-console.service';
 import { GamePlayComponent } from './game-console/game-play/game-play.component';
 import { GameLobbyComponent } from './game-console/game-lobby/game-lobby.component';
+import { GameTimerComponent } from './game-console/game-timer/game-timer.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { GameLobbyComponent } from './game-console/game-lobby/game-lobby.compone
     GameNewComponent,
     GameJoinComponent,
     GamePlayComponent,
-    GameLobbyComponent
+    GameLobbyComponent,
+    GameTimerComponent
   ],
   imports: [
     BrowserModule,
