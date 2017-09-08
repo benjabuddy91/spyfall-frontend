@@ -11,7 +11,7 @@ import { GameConsoleService } from './../game-console.service';
   styleUrls: ['./game-timer.component.css']
 })
 export class GameTimerComponent implements OnInit, OnDestroy {
-  duration: Number = 10;
+  duration: Number = 480;
   timeStart: Number;
   timeLeft: Number;
   timerSubscription: Subscription;

@@ -13,6 +13,7 @@ import { GameConsoleService } from './game-console/game-console.service';
 import { GamePlayComponent } from './game-console/game-play/game-play.component';
 import { GameLobbyComponent } from './game-console/game-lobby/game-lobby.component';
 import { GameTimerComponent } from './game-console/game-timer/game-timer.component';
+import { MinutifyPipe } from './shared/minutify.pipe';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { GameTimerComponent } from './game-console/game-timer/game-timer.compone
     GameJoinComponent,
     GamePlayComponent,
     GameLobbyComponent,
-    GameTimerComponent
+    GameTimerComponent,
+    MinutifyPipe
   ],
   imports: [
     BrowserModule,
