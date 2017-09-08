@@ -28,8 +28,8 @@ export class GameConsoleService {
       });
   }
 
-  getGame(accessCode) {
-    return this.http.get('http://localhost:3000/games/' + accessCode)
+  getGame() {
+    return this.http.get('http://localhost:3000/games/' + this.game['accessCode'])
       .map((response) => {
         return this.game = response.json();
       });

@@ -1,6 +1,10 @@
-import { GameConsoleService } from './../game-console.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+
+import {TimerObservable} from 'rxjs/observable/TimerObservable';
+import { Subscription } from 'rxjs/Subscription';
+
+import { GameConsoleService } from './../game-console.service';
 
 @Component({
   selector: 'app-game-lobby',
@@ -10,6 +14,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class GameLobbyComponent implements OnInit {
   game: Object = {};
   player: String = '';
+  gameSubscription: Subscription;
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -20,6 +25,11 @@ export class GameLobbyComponent implements OnInit {
 
   ngOnInit() {
     if (!this.game || !this.player) { this.router.navigate(['/']); }
+
+    this.gameSubscription = TimerObservable.create(0, 1000).subscribe(() => {
+      this.gameConsoleService.getGame()
+        .subscribe(game => this.game = game);
+    });
 
     this.gameConsoleService.gameStateChanged
       .next('lobby');
