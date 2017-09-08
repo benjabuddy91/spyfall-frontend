@@ -7,8 +7,8 @@ import 'rxjs/Rx';
 export class GameConsoleService {
   gameChanged = new Subject();
   gameStateChanged = new Subject();
-  game: Object;
-  player: String;
+  game: Object = {};
+  player: String = '';
 
   constructor(private http: Http) { }
 
