@@ -8,7 +8,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
   styleUrls: ['./game-lobby.component.css']
 })
 export class GameLobbyComponent implements OnInit {
-  game: Object;
+  game: Object = {};
   player: String;
 
   constructor(private router: Router,

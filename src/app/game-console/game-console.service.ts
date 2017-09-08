@@ -25,21 +25,21 @@ export class GameConsoleService {
     return this.http.put('http://localhost:3000/games/' + accessCode + '/join', { player: player })
       .map((response) => {
         return this.game = response.json();
-      })
+      });
   }
 
   getGame(accessCode) {
     return this.http.get('http://localhost:3000/games/' + accessCode)
       .map((response) => {
         return this.game = response.json();
-      })
+      });
   }
 
   startGame() {
     return this.http.put('http://localhost:3000/games/' + this.game['accessCode'] + '/start', {})
       .map((response) => {
         return this.game = response.json();
-      })
+      });
   }
 
 }
