@@ -8,7 +8,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
   styleUrls: ['./game-lobby.component.css']
 })
 export class GameLobbyComponent implements OnInit {
-  game: Object = {};
+  game: Object;
   player: String;
 
   constructor(private router: Router,
@@ -16,16 +16,11 @@ export class GameLobbyComponent implements OnInit {
               private gameConsoleService: GameConsoleService) {}
 
   ngOnInit() {
+    this.game = this.gameConsoleService.game;
     this.player = this.gameConsoleService.player;
 
     this.gameConsoleService.gameStateChanged
       .next('lobby');
-
-    this.route.params
-      .subscribe((params: Params) => {
-        this.gameConsoleService.getGame(params['accessCode'])
-          .subscribe(game => this.game = game);
-      });
   }
 
   startGame() {
