@@ -28,7 +28,12 @@ export class GameLobbyComponent implements OnInit {
 
     this.gameSubscription = TimerObservable.create(0, 1000).subscribe(() => {
       this.gameConsoleService.getGame()
-        .subscribe(game => this.game = game);
+        .subscribe(game => {
+          this.game = game;
+          if (game['startTime']) {
+            this.router.navigate(['../', this.game['accessCode'], 'play'],  { relativeTo: this.route });
+          }
+        });
     });
 
     this.gameConsoleService.gameStateChanged
@@ -38,7 +43,8 @@ export class GameLobbyComponent implements OnInit {
   startGame() {
     this.gameConsoleService.startGame()
       .subscribe(game => {
-        this.router.navigate(['../', game['accessCode'], 'play'],  { relativeTo: this.route });
+        console.log(game);
+        this.router.navigate(['../', this.game['accessCode'], 'play'],  { relativeTo: this.route });
       });
   }
 
