@@ -15,12 +15,18 @@ export class GameConsoleService {
               private socket: Socket) { }
 
   sendMessage(msg: string) {
-    this.socket.emit("message", msg);
+    this.socket.emit('message', msg);
   }
 
   getMessage() {
     return this.socket
-      .fromEvent<any>("message")
+      .fromEvent<any>('message')
+  }
+
+  playerJoinedObservable() {
+    return this.socket
+      .fromEvent<any>('player-joined')
+      .map(player => this.game['players'].push(player))
   }
 
   createGame(player) {
@@ -33,6 +39,7 @@ export class GameConsoleService {
 
   joinGame(player, accessCode) {
     this.player = player;
+    this.socket.emit('player-joined', player);
     return this.http.put('http://localhost:3000/games/' + accessCode + '/join', { player: player })
       .map((response) => {
         return this.game = response.json();

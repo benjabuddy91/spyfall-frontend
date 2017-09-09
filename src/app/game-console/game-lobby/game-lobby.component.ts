@@ -26,15 +26,8 @@ export class GameLobbyComponent implements OnInit {
   ngOnInit() {
     if (!this.game || !this.player) { this.router.navigate(['/']); }
 
-    this.gameSubscription = TimerObservable.create(0, 1000).subscribe(() => {
-      this.gameConsoleService.getGame()
-        .subscribe(game => {
-          this.game = game;
-          if (game['startTime']) {
-            this.router.navigate(['../', this.game['accessCode'], 'play'],  { relativeTo: this.route });
-          }
-        });
-    });
+    this.gameConsoleService.playerJoinedObservable()
+      .subscribe(player => { this.game = this.gameConsoleService.game })
 
     this.gameConsoleService.gameStateChanged
       .next('lobby');
