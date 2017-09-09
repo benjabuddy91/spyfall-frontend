@@ -31,7 +31,7 @@ export class GameConsoleService {
   playerJoinedObservable() {
     return this.socket
       .fromEvent<any>('player-joined')
-      .map(player => this.game['players'].push(player))
+      .map(player => { if(this.player !== player) this.game['players'].push(player) })
   }
 
   createGame(player) {
@@ -44,9 +44,9 @@ export class GameConsoleService {
 
   joinGame(player, accessCode) {
     this.player = player;
-    this.socket.emit('player-joined', player);
     return this.http.put('http://localhost:3000/games/' + accessCode + '/join', { player: player })
       .map((response) => {
+        this.socket.emit('player-joined', player);
         return this.game = response.json();
       });
   }
