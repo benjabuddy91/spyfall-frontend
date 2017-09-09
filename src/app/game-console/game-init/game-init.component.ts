@@ -14,6 +14,13 @@ export class GameInitComponent implements OnInit {
   ngOnInit() {
     this.gameConsoleService.gameStateChanged
       .next('init');
+
+    this.gameConsoleService.getMessage()
+      .subscribe(message => console.log(message));
+  }
+
+  sendMessage() {
+    this.gameConsoleService.sendMessage('WEEE');
   }
 
 }

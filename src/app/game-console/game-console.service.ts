@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/Rx';
+import { Socket } from 'ng-socket-io';
 
 @Injectable()
 export class GameConsoleService {
@@ -10,7 +11,17 @@ export class GameConsoleService {
   game: Object = {};
   player: String = '';
 
-  constructor(private http: Http) { }
+  constructor(private http: Http,
+              private socket: Socket) { }
+
+  sendMessage(msg: string) {
+    this.socket.emit("message", msg);
+  }
+
+  getMessage() {
+    return this.socket
+      .fromEvent<any>("message")
+  }
 
   createGame(player) {
     this.player = player;
