@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import {TimerObservable} from 'rxjs/observable/TimerObservable';
@@ -11,10 +11,11 @@ import { GameConsoleService } from './../game-console.service';
   templateUrl: './game-lobby.component.html',
   styleUrls: ['./game-lobby.component.css']
 })
-export class GameLobbyComponent implements OnInit {
+export class GameLobbyComponent implements OnInit, OnDestroy {
   game: Object = {};
   player: String = '';
   gameSubscription: Subscription;
+  playerJoinedSubscription: Subscription;
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -26,11 +27,18 @@ export class GameLobbyComponent implements OnInit {
   ngOnInit() {
     if (!this.game || !this.player) { this.router.navigate(['/']); }
 
-    this.gameConsoleService.playerJoinedObservable()
-      .subscribe(player => { this.game = this.gameConsoleService.game })
+    this.playerJoinedSubscription = this.gameConsoleService.playerJoinedObservable()
+      .subscribe(player => {
+        this.game = this.gameConsoleService.game
+        console.log(this.game);
+      })
 
     this.gameConsoleService.gameStateChanged
       .next('lobby');
+  }
+
+  ngOnDestroy() {
+    this.playerJoinedSubscription.unsubscribe();
   }
 
   startGame() {

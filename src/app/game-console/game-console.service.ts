@@ -14,6 +14,11 @@ export class GameConsoleService {
   constructor(private http: Http,
               private socket: Socket) { }
 
+  clearGameAndPlayer() {
+    this.game = {};
+    this.player = '';
+  }
+
   sendMessage(msg: string) {
     this.socket.emit('message', msg);
   }
