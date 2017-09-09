@@ -2,7 +2,7 @@
   <app-game-timer></app-game-timer>
   <hr>
   <h3 *ngIf="player === game['spy']; else locationContent">You are the spy!</h3>
-  <ng-template #locationContent>{{ game['location']['name'] }}</ng-template>
+  <ng-template #locationContent><h3>{{ game['location']['name'] }}</h3></ng-template>
   <ul class="list-group row">
     <li
       class="list-group-item col-xs-6"
