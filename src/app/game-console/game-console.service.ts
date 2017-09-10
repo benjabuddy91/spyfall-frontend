@@ -34,6 +34,11 @@ export class GameConsoleService {
       .map(player => { if(this.player !== player) this.game['players'].push(player) })
   }
 
+  gameStartedObservable() {
+    return this.socket
+      .fromEvent<any>('game-started')
+  }
+
   createGame(player) {
     this.player = player;
     return this.http.post('http://localhost:3000/games', { player: player })
@@ -61,6 +66,7 @@ export class GameConsoleService {
   startGame() {
     return this.http.put('http://localhost:3000/games/' + this.game['accessCode'] + '/start', {})
       .map((response) => {
+        this.socket.emit('game-started', true);
         return this.game = response.json();
       });
   }

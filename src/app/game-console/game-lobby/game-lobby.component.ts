@@ -16,6 +16,7 @@ export class GameLobbyComponent implements OnInit, OnDestroy {
   player: String = '';
   gameSubscription: Subscription;
   playerJoinedSubscription: Subscription;
+  gameStartedSubscription: Subscription;
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -30,7 +31,14 @@ export class GameLobbyComponent implements OnInit, OnDestroy {
     this.playerJoinedSubscription = this.gameConsoleService.playerJoinedObservable()
       .subscribe(player => {
         this.game = this.gameConsoleService.game
-        console.log(this.game);
+      })
+
+    this.gameStartedSubscription = this.gameConsoleService.gameStartedObservable()
+      .subscribe(started => {
+        this.gameConsoleService.getGame()
+          .subscribe(game => {
+            this.router.navigate(['play'], { relativeTo: this.route });
+          })
       })
 
     this.gameConsoleService.gameStateChanged
@@ -39,6 +47,7 @@ export class GameLobbyComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.playerJoinedSubscription.unsubscribe();
+    this.gameStartedSubscription.unsubscribe();
   }
 
   startGame() {
