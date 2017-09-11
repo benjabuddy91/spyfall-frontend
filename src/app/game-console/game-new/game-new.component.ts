@@ -26,8 +26,8 @@ export class GameNewComponent implements OnInit {
 
   createGame() {
     this.gameConsoleService.createGame(this.gameForm.value.player)
-      .subscribe((game: Object) => {
-        this.router.navigate(['../', game['accessCode']], {relativeTo: this.route});
+      .subscribe(() => {
+        this.router.navigate(['../', this.gameConsoleService.game['accessCode']], {relativeTo: this.route});
       });
   }
 }

@@ -34,7 +34,7 @@ export class GameLobbyComponent implements OnInit, OnDestroy {
       });
 
     this.gameStartedSubscription = this.gameConsoleService.gameStartedObservable()
-      .subscribe(started => {
+      .subscribe(() => {
         this.gameConsoleService.getGame()
           .subscribe(game => {
             this.router.navigate(['play'], { relativeTo: this.route });

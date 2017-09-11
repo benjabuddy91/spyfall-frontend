@@ -32,6 +32,7 @@ export class GameConsoleService {
     return this.socket
       .fromEvent<any>('player-joined')
       .map(player => {
+        console.log(player);
         if (this.player !== player) { this.game['players'].push(player); }
       });
   }
@@ -45,7 +46,8 @@ export class GameConsoleService {
     this.player = player;
     return this.http.post('http://localhost:3000/games', { player: player })
       .map((response: Response) => {
-        return this.game = response.json();
+        this.game = response.json();
+        this.socket.emit('create-game', this.game['accessCode']);
       });
   }
 
@@ -53,8 +55,12 @@ export class GameConsoleService {
     this.player = player;
     return this.http.put('http://localhost:3000/games/' + accessCode + '/join', { player: player })
       .map((response) => {
-        this.socket.emit('player-joined', player);
-        return this.game = response.json();
+        this.game = response.json();
+        this.socket.emit('join-game',
+        {
+          gameAccessCode: this.game['accessCode'],
+          player: this.player
+        });
       });
   }
 
@@ -68,8 +74,8 @@ export class GameConsoleService {
   startGame() {
     return this.http.put('http://localhost:3000/games/' + this.game['accessCode'] + '/start', {})
       .map((response) => {
+        this.game = response.json();
         this.socket.emit('game-started', this.game['accessCode']);
-        return this.game = response.json();
       });
   }
 
