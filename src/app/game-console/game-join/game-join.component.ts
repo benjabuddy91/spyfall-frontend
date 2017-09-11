@@ -28,6 +28,8 @@ export class GameJoinComponent implements OnInit {
     this.gameConsoleService.joinGame(this.gameForm.value.player, this.gameForm.value.accessCode)
       .subscribe(() => {
         this.router.navigate(['../', this.gameConsoleService.game['accessCode']], { relativeTo: this.route });
+      }, (err) => {
+        console.log(err.status);
       });
   }
 

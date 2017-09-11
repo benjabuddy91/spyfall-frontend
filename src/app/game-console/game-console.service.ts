@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs/Observable';
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Subject } from 'rxjs/Subject';
@@ -61,6 +62,9 @@ export class GameConsoleService {
           gameAccessCode: this.game['accessCode'],
           player: this.player
         });
+      })
+      .catch((err) => {
+        return Observable.throw(err);
       });
   }
 
