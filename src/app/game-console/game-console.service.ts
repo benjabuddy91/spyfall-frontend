@@ -25,18 +25,20 @@ export class GameConsoleService {
 
   getMessage() {
     return this.socket
-      .fromEvent<any>('message')
+      .fromEvent<any>('message');
   }
 
   playerJoinedObservable() {
     return this.socket
       .fromEvent<any>('player-joined')
-      .map(player => { if(this.player !== player) this.game['players'].push(player) })
+      .map(player => {
+        if (this.player !== player) { this.game['players'].push(player); }
+      });
   }
 
   gameStartedObservable() {
     return this.socket
-      .fromEvent<any>('game-started')
+      .fromEvent<any>('game-started');
   }
 
   createGame(player) {
@@ -66,7 +68,7 @@ export class GameConsoleService {
   startGame() {
     return this.http.put('http://localhost:3000/games/' + this.game['accessCode'] + '/start', {})
       .map((response) => {
-        this.socket.emit('game-started', true);
+        this.socket.emit('game-started', this.game['accessCode']);
         return this.game = response.json();
       });
   }
