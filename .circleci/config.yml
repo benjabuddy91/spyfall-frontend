@@ -1,0 +1,18 @@
+version: 2
+jobs:
+  build:
+    parallelism: 1
+    working_directory: ~/circleci-spyfall-frontend
+    docker:
+      - image: circleci/node:carbon
+
+    steps:
+      - checkout
+
+      - run: npm install
+
+      - run: npm run build
+
+      - run: aws s3 cp ./dist s3://spyfall-frontend/ --recursive
+
+      - run: docker push registry.heroku.com/express-sample-app-benja/web
