@@ -16,7 +16,7 @@ import { GameLobbyComponent } from './game-console/game-lobby/game-lobby.compone
 import { GameTimerComponent } from './game-console/game-timer/game-timer.component';
 import { MinutifyPipe } from './shared/minutify.pipe';
 
-const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
+const config: SocketIoConfig = { url: 'https://spyfall-api.herokuapp.com', options: {} };
 
 @NgModule({
   declarations: [
