@@ -45,7 +45,7 @@ export class GameConsoleService {
 
   createGame(player) {
     this.player = player;
-    return this.http.post('http://localhost:3000/games', { player: player })
+    return this.http.post('https://spyfall-api.herokuapp.com/games', { player: player })
       .map((response: Response) => {
         this.game = response.json();
         this.socket.emit('create-game', this.game['accessCode']);
@@ -54,7 +54,7 @@ export class GameConsoleService {
 
   joinGame(player, accessCode) {
     this.player = player;
-    return this.http.put('http://localhost:3000/games/' + accessCode + '/join', { player: player })
+    return this.http.put('https://spyfall-api.herokuapp.com/games/' + accessCode + '/join', { player: player })
       .map((response) => {
         this.game = response.json();
         this.socket.emit('join-game',
@@ -69,14 +69,14 @@ export class GameConsoleService {
   }
 
   getGame() {
-    return this.http.get('http://localhost:3000/games/' + this.game['accessCode'])
+    return this.http.get('https://spyfall-api.herokuapp.com/games/' + this.game['accessCode'])
       .map((response) => {
         return this.game = response.json();
       });
   }
 
   startGame() {
-    return this.http.put('http://localhost:3000/games/' + this.game['accessCode'] + '/start', {})
+    return this.http.put('https://spyfall-api.herokuapp.com/games/' + this.game['accessCode'] + '/start', {})
       .map((response) => {
         this.game = response.json();
         this.socket.emit('game-started', this.game['accessCode']);
