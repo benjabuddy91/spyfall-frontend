@@ -16,5 +16,3 @@ jobs:
       - run: npm run build
 
       - run: aws s3 cp ./dist s3://spyfall-frontend/ --recursive
-
-      - run: docker push registry.heroku.com/express-sample-app-benja/web
